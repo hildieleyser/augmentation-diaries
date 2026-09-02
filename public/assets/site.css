@@ -12,7 +12,7 @@
   --focus:#B9CCF5;
   --bad:#F0929A;
   --plate:#0C0E13;        /* the drawings keep their own ground in both themes */
-  --display:"Bodoni Moda","Didot","Times New Roman",serif;
+  --display:"Fraunces","Iowan Old Style",Georgia,serif;
   --body:"Karla","Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:light){
@@ -91,16 +91,18 @@ a:hover{text-decoration-thickness:2px}
   color:var(--ink-3);
 }
 
-/* stroke weight: 600 keeps Bodoni's hairlines visible at heading sizes */
+/* Fraunces carries an optical-size axis, so the display sizes get the wide
+   cut and the smaller headings a tighter one. Weight 600 throughout below h1. */
 
 /* ---------- opening ---------- */
 .open{padding:clamp(52px,9vw,104px) 0 0}
 h1{
   font-family:var(--display);
   font-weight:400;
-  font-size:clamp(44px,8.2vw,94px);
-  line-height:1.02;
-  letter-spacing:-.005em;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;
+  font-size:clamp(44px,8.2vw,92px);
+  line-height:1;
+  letter-spacing:-.02em;
   margin:clamp(22px,3vw,32px) 0 0;
 }
 h1 i{font-style:italic}
@@ -144,6 +146,7 @@ section{padding:clamp(54px,8vw,92px) 0 0}
 h2{
   font-family:var(--display);
   font-weight:600;
+  font-variation-settings:"opsz" 72,"SOFT" 0,"WONK" 0;
   font-size:clamp(30px,4.4vw,46px);
   line-height:1.05;
   letter-spacing:-.012em;
@@ -165,6 +168,7 @@ h2 i{font-style:italic}
 .strand h3{
   font-family:var(--display);
   font-weight:600;
+  font-variation-settings:"opsz" 36,"SOFT" 0,"WONK" 0;
   font-size:clamp(27px,3.4vw,38px);
   line-height:1.08;
   letter-spacing:-.01em;
@@ -187,6 +191,7 @@ h2 i{font-style:italic}
 .how h3{
   font-family:var(--display);
   font-weight:600;
+  font-variation-settings:"opsz" 36,"SOFT" 0,"WONK" 0;
   font-size:27px;
   line-height:1.14;
   margin:0 0 10px;
@@ -207,6 +212,7 @@ h2 i{font-style:italic}
 .person h3{
   font-family:var(--display);
   font-weight:600;
+  font-variation-settings:"opsz" 36,"SOFT" 0,"WONK" 0;
   font-size:clamp(26px,3vw,32px);
   line-height:1.1;
   letter-spacing:-.01em;
@@ -218,6 +224,7 @@ h2 i{font-style:italic}
 .lab h3{
   font-family:var(--display);
   font-weight:600;
+  font-variation-settings:"opsz" 36,"SOFT" 0,"WONK" 0;
   font-size:clamp(24px,2.7vw,30px);
   line-height:1.12;
   margin:0 0 14px;
