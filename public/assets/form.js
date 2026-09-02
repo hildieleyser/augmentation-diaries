@@ -2,6 +2,16 @@
   var form = document.getElementById('enquiry');
   if (!form) return;
 
+  // The form needs the Node backend. On a static host (GitHub Pages) there is
+  // none, so it stays hidden and the email line does the job instead.
+  fetch('healthz', { method: 'GET' })
+    .then(function (response) {
+      if (response.ok) form.hidden = false;
+    })
+    .catch(function () {
+      /* no backend here, leave the form hidden */
+    });
+
   var status = document.getElementById('f-status');
   var button = document.getElementById('f-submit');
   var openedAt = Date.now();
@@ -69,7 +79,7 @@
     button.setAttribute('aria-busy', 'true');
     say('Sending.');
 
-    fetch('/api/enquiries', {
+    fetch('api/enquiries', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(payload),

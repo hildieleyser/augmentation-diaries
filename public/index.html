@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,600&family=Karla:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 <a class="skip" href="#content">Skip to the page</a>
@@ -150,7 +150,7 @@
     <h2 id="get-in-touch">Get in touch</h2>
     <p class="quiet" style="color:var(--ink-2)">If you want to know more, or one of these sounds like your own story, send us a note.</p>
 
-    <form class="enquiry" id="enquiry" novalidate aria-labelledby="get-in-touch">
+    <form class="enquiry" id="enquiry" novalidate aria-labelledby="get-in-touch" hidden>
       <div class="field">
         <label for="f-name">Your name <span class="req">(required)</span></label>
         <input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required
@@ -184,8 +184,9 @@
       </div>
       <button type="submit" id="f-submit">Send</button>
       <p class="form-note" id="f-status" role="status" aria-live="polite"></p>
-      <p class="form-note">Email works too, at <a href="mailto:REPLACE@EXAMPLE.COM?subject=Augmentation%20Diaries">REPLACE@EXAMPLE.COM</a>. Nothing you send is published, and we reply ourselves.</p>
     </form>
+
+    <p class="form-note reach">Write to <a href="mailto:REPLACE@EXAMPLE.COM?subject=Augmentation%20Diaries">REPLACE@EXAMPLE.COM</a>. Nothing you send is published, and we reply ourselves.</p>
   </div>
 
   </main>
@@ -196,7 +197,7 @@
   </footer>
 
 </div>
-<script src="/assets/art.js" defer></script>
-<script src="/assets/form.js" defer></script>
+<script src="assets/art.js" defer></script>
+<script src="assets/form.js" defer></script>
 </body>
 </html>

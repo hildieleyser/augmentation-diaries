@@ -141,3 +141,19 @@ test('unknown api routes are 404 json, other methods 405', async () => {
     assert.equal(wrong.status, 405);
   });
 });
+
+// GitHub Pages serves a project site under /<repo>/, so a root-relative asset
+// path would 404 there. This guards against reintroducing one.
+test('asset references are relative, so the page works under a subpath', async () => {
+  const html = await fs.readFile(new URL('../public/index.html', import.meta.url), 'utf8');
+  const rooted = html.match(/(?:href|src)="\/[^"]*"/g) ?? [];
+  assert.deepEqual(rooted, [], `root-relative asset paths found: ${rooted.join(', ')}`);
+  assert.match(html, /href="assets\/site\.css"/);
+});
+
+test('the enquiry form starts hidden and reveals itself only where the API answers', async () => {
+  const html = await fs.readFile(new URL('../public/index.html', import.meta.url), 'utf8');
+  assert.match(html, /<form class="enquiry"[^>]*hidden>/);
+  // The email route stays visible whether or not the backend is there.
+  assert.match(html, /class="form-note reach"/);
+});

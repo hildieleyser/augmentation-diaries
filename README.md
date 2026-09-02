@@ -125,6 +125,32 @@ nice-to-haves. Checked at a true 320 px viewport and in both themes.
 Two things still need a person rather than a checklist: a pass with VoiceOver,
 and a read by somebody who uses magnification daily.
 
+## GitHub Pages
+
+The workflow in `.github/workflows/pages.yml` runs the tests and then publishes
+`public/` to Pages on every push to `main` that touches the site. It needs Pages
+switched on for the repository, with the source set to GitHub Actions.
+
+Two things follow from Pages being static:
+
+- **The enquiry form cannot work there.** `form.js` asks the backend for
+  `healthz` on load and only reveals the form if something answers, so on Pages
+  the form stays hidden and the email address underneath it is the way in. Run
+  `server.js` on a host with a Node process to get the form.
+- **Asset paths have to be relative.** A project site lives under
+  `/augmentation-diaries/`, so `/assets/site.css` would 404. A test fails if a
+  root-relative path creeps back in.
+
+Pages on a **private** repository needs GitHub Pro, Team or Enterprise. On the
+free plan the repository has to be public first, which is a decision about the
+copy on the page rather than about the code.
+
+A custom domain goes in `public/CNAME`, one line, no scheme:
+
+```
+augmentationdiaries.com
+```
+
 ## Storage, and when to move off it
 
 JSON Lines on disk suits a handful of enquiries a week: it survives a crash

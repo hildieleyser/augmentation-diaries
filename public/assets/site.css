@@ -292,3 +292,4 @@ footer p{font-size:15px;color:var(--ink-3);max-width:44ch;line-height:1.55}
 .form-note{font-size:15px;line-height:1.55;color:var(--ink-3);max-width:44ch}
 .form-note.ok{color:var(--lum)}
 .form-note.bad{color:var(--bad)}
+.form-note.reach{margin-top:22px;font-size:18px;color:var(--ink-2);max-width:46ch}
