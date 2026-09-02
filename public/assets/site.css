@@ -1,14 +1,72 @@
+/* Dark is the design's default. Light and the explicit stamps follow, so all
+   three viewer states (dark, light, unset) resolve to a full palette. */
 :root{
   --void:#0A0B0E;
   --panel:#101217;
   --ink:#EDECE8;
   --ink-2:#A4A7AF;
-  --ink-3:#6F737C;
+  --ink-3:#8B929E;        /* 6.3:1 on --void, for 14-15px text */
   --line:#20232B;
+  --field-border:#5A616E; /* 3.0:1 on --panel, for input outlines */
   --lum:#B9CCF5;
+  --focus:#B9CCF5;
+  --bad:#F0929A;
+  --plate:#0C0E13;        /* the drawings keep their own ground in both themes */
   --display:"Bodoni Moda","Didot","Times New Roman",serif;
   --body:"Karla","Helvetica Neue",Arial,sans-serif;
 }
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --void:#F4F3EF;
+    --panel:#FFFFFF;
+    --ink:#14171C;
+    --ink-2:#4B5260;
+    --ink-3:#5C6474;
+    --line:#D5D4CE;
+    --field-border:#8A8F99;
+    --lum:#23368F;
+    --focus:#23368F;
+    --bad:#A32330;
+  }
+}
+:root[data-theme="light"]{
+  --void:#F4F3EF;
+  --panel:#FFFFFF;
+  --ink:#14171C;
+  --ink-2:#4B5260;
+  --ink-3:#5C6474;
+  --line:#D5D4CE;
+  --field-border:#8A8F99;
+  --lum:#23368F;
+  --focus:#23368F;
+  --bad:#A32330;
+}
+:root[data-theme="dark"]{
+  --void:#0A0B0E;
+  --panel:#101217;
+  --ink:#EDECE8;
+  --ink-2:#A4A7AF;
+  --ink-3:#8B929E;
+  --line:#20232B;
+  --field-border:#5A616E;
+  --lum:#B9CCF5;
+  --focus:#B9CCF5;
+  --bad:#F0929A;
+}
+@media (prefers-contrast:more){
+  :root{--ink-2:var(--ink);--ink-3:var(--ink);--line:var(--ink-3);--field-border:var(--ink)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+.skip{
+  position:absolute;left:-9999px;top:0;
+  background:var(--ink);color:var(--void);
+  padding:12px 18px;z-index:10;
+  font-size:17px;font-weight:700;
+}
+.skip:focus{left:12px;top:12px}
+
 *{box-sizing:border-box}
 html{background:var(--void)}
 body{
@@ -22,9 +80,9 @@ body{
 }
 p{margin:0}
 img,canvas{display:block;max-width:100%}
-a{color:var(--lum);text-decoration:none;border-bottom:1px solid rgba(185,204,245,.4)}
-a:hover{border-bottom-color:var(--lum)}
-:focus-visible{outline:2px solid var(--lum);outline-offset:4px}
+a{color:var(--lum);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(22px,5vw,60px)}
 .label{
@@ -32,6 +90,8 @@ a:hover{border-bottom-color:var(--lum)}
   letter-spacing:.16em;text-transform:uppercase;
   color:var(--ink-3);
 }
+
+/* stroke weight: 600 keeps Bodoni's hairlines visible at heading sizes */
 
 /* ---------- opening ---------- */
 .open{padding:clamp(52px,9vw,104px) 0 0}
@@ -60,7 +120,7 @@ h1 i{font-style:italic}
 }
 
 .plate-wide{margin-top:clamp(38px,6vw,64px)}
-.plate-wide canvas{width:100%;height:auto;background:var(--void)}
+.plate-wide canvas{width:100%;height:auto;background:var(--plate)}
 .cap{
   margin-top:14px;
   font-size:15px;line-height:1.55;
@@ -83,7 +143,7 @@ section{padding:clamp(54px,8vw,92px) 0 0}
 
 h2{
   font-family:var(--display);
-  font-weight:500;
+  font-weight:600;
   font-size:clamp(30px,4.4vw,46px);
   line-height:1.05;
   letter-spacing:-.012em;
@@ -101,10 +161,10 @@ h2 i{font-style:italic}
   align-items:center;
 }
 .strand:nth-child(even) .art{order:2}
-.art canvas{width:100%;height:auto;background:var(--panel)}
+.art canvas{width:100%;height:auto;background:var(--plate)}
 .strand h3{
   font-family:var(--display);
-  font-weight:500;
+  font-weight:600;
   font-size:clamp(27px,3.4vw,38px);
   line-height:1.08;
   letter-spacing:-.01em;
@@ -117,16 +177,16 @@ h2 i{font-style:italic}
 .how{
   margin-top:clamp(4px,1vw,10px);
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(min(19rem,100%),1fr));
   gap:0 clamp(30px,5vw,72px);
 }
 .how div{
   padding:22px 0 26px;
   border-top:1px solid var(--line);
 }
-.how h4{
+.how h3{
   font-family:var(--display);
-  font-weight:500;
+  font-weight:600;
   font-size:27px;
   line-height:1.14;
   margin:0 0 10px;
@@ -139,14 +199,14 @@ h2 i{font-style:italic}
 .people{
   margin-top:clamp(30px,4vw,44px);
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(min(19rem,100%),1fr));
   gap:clamp(28px,4vw,64px);
 }
 .person{border-top:2px solid var(--ink);padding-top:20px}
 .person .role{margin-bottom:12px;display:block}
 .person h3{
   font-family:var(--display);
-  font-weight:500;
+  font-weight:600;
   font-size:clamp(26px,3vw,32px);
   line-height:1.1;
   letter-spacing:-.01em;
@@ -157,7 +217,7 @@ h2 i{font-style:italic}
 .lab{margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--line);padding-top:clamp(24px,3vw,34px)}
 .lab h3{
   font-family:var(--display);
-  font-weight:500;
+  font-weight:600;
   font-size:clamp(24px,2.7vw,30px);
   line-height:1.12;
   margin:0 0 14px;
@@ -201,30 +261,34 @@ footer p{font-size:15px;color:var(--ink-3);max-width:44ch;line-height:1.55}
   font-size:18px;
   color:var(--ink);
   background:var(--panel);
-  border:1px solid var(--line);
+  border:1px solid var(--field-border);
   border-radius:0;
   padding:13px 14px;
   width:100%;
 }
 .enquiry textarea{resize:vertical;line-height:1.55}
 .enquiry input:focus-visible,.enquiry select:focus-visible,.enquiry textarea:focus-visible{
-  outline:2px solid var(--lum);outline-offset:2px;
+  outline:3px solid var(--focus);outline-offset:2px;
 }
+.enquiry [aria-invalid="true"]{border-color:var(--bad);border-width:2px}
+.field-error{font-size:16px;line-height:1.45;color:var(--bad)}
+.req{text-transform:none;letter-spacing:0;color:var(--ink-3);font-weight:400}
 .enquiry .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .enquiry button{
+  min-height:48px;
   font-family:var(--display);
-  font-weight:500;
+  font-weight:600;
   font-size:21px;
   letter-spacing:-.01em;
-  color:var(--void);
+  color:var(--panel);
   background:var(--ink);
   border:1px solid var(--ink);
   padding:13px 26px;
   justify-self:start;
   cursor:pointer;
 }
-.enquiry button:hover{background:var(--lum);border-color:var(--lum)}
+.enquiry button:hover{background:var(--lum);border-color:var(--lum);color:var(--panel)}
 .enquiry button[disabled]{opacity:.55;cursor:default}
 .form-note{font-size:15px;line-height:1.55;color:var(--ink-3);max-width:44ch}
 .form-note.ok{color:var(--lum)}
-.form-note.bad{color:#E8878F}
+.form-note.bad{color:var(--bad)}

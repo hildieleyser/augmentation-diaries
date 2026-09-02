@@ -88,6 +88,43 @@ whole internet.
   photographs arrive, drop them in `public/assets/` and replace the `<canvas>`
   elements with `<img>`.
 
+## Accessibility
+
+Some of the people this page is written for read with a screen reader or at
+heavy magnification, so the following are treated as requirements rather than
+nice-to-haves. Checked at a true 320 px viewport and in both themes.
+
+- **Both themes.** Dark is the default; a light palette comes in under
+  `prefers-color-scheme: light`, and `data-theme` on the root element overrides
+  either. Every colour is a token, declared in all three states.
+- **Contrast.** Body text runs 8:1 or better. The small uppercase labels,
+  captions and footer were at 4.14:1 and now sit at 6.3:1 in dark and 5.4:1 in
+  light. Input borders were at 1.19:1 against their fill, which failed the 3:1
+  minimum for a control boundary, and are now at 3.0:1 or better.
+- **Type.** Bodoni is a hairline face, so headings use the 600 cut rather than
+  500, which keeps the thin strokes visible on a dark ground. Nothing on the
+  page is under 14 px, and running text is 19 px and up.
+- **Reflow.** No horizontal scrolling at 320 px. The multi-column grids use
+  `minmax(min(19rem, 100%), 1fr)` so a narrow viewport collapses them instead of
+  overflowing.
+- **Structure.** One `h1`, then `h2` per section and `h3` beneath, with no
+  skipped levels. `main` landmark, a skip link, and `lang` on the root.
+- **Focus.** A 3 px outline in the accent colour, offset from the element, on
+  everything focusable.
+- **The form.** Every field has a real label, required fields say so in the
+  label, and an invalid field gets `aria-invalid` plus its own error message
+  wired up with `aria-describedby`. The first bad field takes focus, so a screen
+  reader reads the label and the problem together. The status line is a
+  `role="status"` live region. Controls are at least 48 px tall.
+- **The drawings.** Each canvas carries `role="img"` and a description of what
+  it shows. They keep a dark ground in both themes, since they are images rather
+  than page furniture.
+- **Motion and contrast preferences.** `prefers-reduced-motion` and
+  `prefers-contrast: more` are both honoured.
+
+Two things still need a person rather than a checklist: a pass with VoiceOver,
+and a read by somebody who uses magnification daily.
+
 ## Storage, and when to move off it
 
 JSON Lines on disk suits a handful of enquiries a week: it survives a crash

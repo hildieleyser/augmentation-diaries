@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Augmentation Diaries</title>
 <meta name="description" content="A podcast in development about the technologies that rebuild human senses, and about how far behind the language still is.">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
 <meta property="og:title" content="Augmentation Diaries">
 <meta property="og:description" content="A podcast in development about the technologies that rebuild human senses, and about how far behind the language still is.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Karla:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,600&family=Karla:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
+<a class="skip" href="#content">Skip to the page</a>
 <div class="wrap">
 
   <header class="open">
@@ -28,6 +29,8 @@
       <figcaption class="cap">A research interview, an hour or more, transcribed in full.</figcaption>
     </figure>
   </header>
+
+  <main id="content">
 
   <section class="split">
     <h2>About the podcast</h2>
@@ -75,27 +78,27 @@
     <h2>And underneath most of it</h2>
     <div class="how">
       <div>
-        <h4>What gets funded and what gets asked for</h4>
+        <h3>What gets funded and what gets asked for</h3>
         <p>Machine learning for prosthetic control funds easily. A better liner for the socket does not, though the man running 5k has to stop and drain his sleeve. One engineer has watched ideas win money for sounding futuristic while the thing his participants kept raising went unfunded.</p>
       </div>
       <div>
-        <h4>Nobody talks about the life afterwards</h4>
+        <h3>Nobody talks about the life afterwards</h3>
         <p>A surgical consultation covers the level of the cut and what happens to the nerves. The patient wants to know what next year looks like. One rehabilitation director argues that a rehabilitator and a psychologist belong in that room alongside the surgeon.</p>
       </div>
       <div>
-        <h4>The company can change its mind</h4>
+        <h3>The company can change its mind</h3>
         <p>Funding, hardware and access sit with manufacturers who reorganise, swap chief executives and drop a research direction. Senior engineers say the work is promising and that their hands are tied.</p>
       </div>
       <div>
-        <h4>Whether it reads as augmentation at all</h4>
+        <h3>Whether it reads as augmentation at all</h3>
         <p>A device that looks futuristic is an asset in London and a stigma in Rwanda, where a natural-looking limb is the one that gets worn. And a lot of people are not after a new ability. They have a limb that half works, and nothing exists between a prosthesis and a brace.</p>
       </div>
       <div>
-        <h4>People trade the damage knowingly</h4>
+        <h3>People trade the damage knowingly</h3>
         <p>Rowers with terrible technique keep it because it wins medals. A man was told for six months that his new leg would never take a fall, then went skiing in the first week of the season. The trade is usually made with the information in hand.</p>
       </div>
       <div>
-        <h4>Some of it cannot be put into words</h4>
+        <h3>Some of it cannot be put into words</h3>
         <p>Thirty years of hypotheses about phantom limb pain have not explained it, so nobody can treat it properly either. As one neuroscientist put it, the hard part is that people often cannot describe themselves.</p>
       </div>
     </div>
@@ -129,31 +132,36 @@
     <h2>How the research interviews go</h2>
     <div class="how">
       <div>
-        <h4>An hour, and rarely only one</h4>
+        <h3>An hour, and rarely only one</h3>
         <p>The first conversation is recorded and transcribed in full, and most of them run over. People rarely describe an experience well the first time they are asked, so we go back.</p>
       </div>
       <div>
-        <h4>The exact phrases get kept</h4>
+        <h3>The exact phrases get kept</h3>
         <p>There is no agreed vocabulary for any of this, so we keep a record of how people put it, in their words rather than ours. That record has been the most useful thing in the research so far.</p>
       </div>
       <div>
-        <h4>We follow the person into the technical detail</h4>
+        <h3>We follow the person into the technical detail</h3>
         <p>Interviews start with how someone ended up in this field, and the engineering arrives when they bring it. Nothing gets simplified on the way out.</p>
       </div>
     </div>
   </section>
 
   <div class="end">
+    <h2 id="get-in-touch">Get in touch</h2>
     <p class="quiet" style="color:var(--ink-2)">If you want to know more, or one of these sounds like your own story, send us a note.</p>
 
-    <form class="enquiry" id="enquiry" novalidate>
+    <form class="enquiry" id="enquiry" novalidate aria-labelledby="get-in-touch">
       <div class="field">
-        <label for="f-name">Your name</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required>
+        <label for="f-name">Your name <span class="req">(required)</span></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required
+               aria-describedby="e-name">
+        <p class="field-error" id="e-name" hidden></p>
       </div>
       <div class="field">
-        <label for="f-email">Email</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" required>
+        <label for="f-email">Email <span class="req">(required)</span></label>
+        <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" required
+               aria-describedby="e-email">
+        <p class="field-error" id="e-email" hidden></p>
       </div>
       <div class="field">
         <label for="f-kind">Which of these are you</label>
@@ -166,17 +174,21 @@
       </div>
       <div class="field">
         <label for="f-message">Anything you want to tell us</label>
-        <textarea id="f-message" name="message" rows="4" maxlength="4000"></textarea>
+        <textarea id="f-message" name="message" rows="4" maxlength="4000"
+                  aria-describedby="e-message"></textarea>
+        <p class="field-error" id="e-message" hidden></p>
       </div>
       <div class="field hp" aria-hidden="true">
         <label for="f-role">Role</label>
         <input id="f-role" name="role" type="text" tabindex="-1" autocomplete="off">
       </div>
       <button type="submit" id="f-submit">Send</button>
-      <p class="form-note" id="f-status" role="status"></p>
+      <p class="form-note" id="f-status" role="status" aria-live="polite"></p>
       <p class="form-note">Email works too, at <a href="mailto:REPLACE@EXAMPLE.COM?subject=Augmentation%20Diaries">REPLACE@EXAMPLE.COM</a>. Nothing you send is published, and we reply ourselves.</p>
     </form>
   </div>
+
+  </main>
 
   <footer>
     <p class="label">Augmentation Diaries &nbsp;&middot;&nbsp; 2026</p>
